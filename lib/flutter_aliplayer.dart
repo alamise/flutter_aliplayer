@@ -559,13 +559,22 @@ class FlutterAliplayer {
         if (onInfo != null) {
           int infoCode = event['infoCode'];
           //int extraValue = event['extraValue'];
+          int extraValue = -1001;
 
-          late int extraValue;
-          try {
+          if (event['extraValue'] is int) {
+            print("整型");
             extraValue = event['extraValue'];
-          } on Exception catch (_) {
-            extraValue = -1001; //错误值
+          } else {
+            print(
+                "onInfo type = ${event['extraValue'].runtimeType} ,value:${event['extraValue']}");
           }
+
+          // late int extraValue;
+          // try {
+          //   extraValue = event['extraValue'];
+          // } on Exception catch (_) {
+          //   extraValue = -1001; //错误值
+          // }
 
           String extraMsg = event['extraMsg'] ?? '';
           onInfo!(infoCode, extraValue, extraMsg, playerId);
